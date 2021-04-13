@@ -3,17 +3,22 @@ package com.alura.appium;
 import com.alura.appium.PageObjects.CadastroPageObject;
 import com.alura.appium.PageObjects.LoginPageObject;
 import io.appium.java_client.AppiumDriver;
-import org.junit.Assert;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.NoSuchElementException;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FeatureCadastro {
+
+    private AppiumDriver driver;
+
+    @Before
+    public void Before(){
+        driver = AppiumDriverConfig.Instance().driver;
+    }
+
     @Test
     public void T1_nao_consigo_cadastrar_usuario_com_senhas_que_nao_conferem() {
-        AppiumDriver driver = AppiumDriverConfig.Instance().driver;
 
         //Given
         LoginPageObject telaLogin = new LoginPageObject(driver);
@@ -33,7 +38,6 @@ public class FeatureCadastro {
 
     @Test
     public void T2_cadastrar_usuario_e_senha_validas() throws NoSuchElementException {
-        AppiumDriver driver = AppiumDriverConfig.Instance().driver;
 
         //Given
         LoginPageObject telaLogin = new LoginPageObject(driver);
@@ -46,23 +50,27 @@ public class FeatureCadastro {
 
         //Then (Asserting that NoSuchElements expecetion happens)
         telaLogin.BuscarElementos();
-
-        driver.navigate().back();
     }
 
     @Test
     public  void  T3_cadastrar_usuario_ja_existente() throws NoSuchElementException{
-        AppiumDriver driver = AppiumDriverConfig.Instance().driver;
 
+        //Given
+        String usuario = "Jonas";
+        String senha = "123";
+        String confirmacao = "123";
         LoginPageObject telaLogin = new LoginPageObject(driver);
         telaLogin.BuscarElementos();
         CadastroPageObject telaCadastro = telaLogin.irParaTelaCadastro();
         telaCadastro.BuscarElementos();
-        telaCadastro.Cadastrar("Jonas", "123", "123");
+
+        //When
+        telaCadastro.Cadastrar(usuario, senha, confirmacao);
 
         telaLogin.irParaTelaCadastro();
-        telaCadastro.Cadastrar("Jonas", "123", "123");
+        telaCadastro.Cadastrar(usuario, senha, confirmacao);
 
+        //Then
         Assert.assertEquals("Usuario já Cadastrado", telaCadastro.ObterErroMessage());
     }
 }

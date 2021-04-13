@@ -5,6 +5,7 @@ import com.alura.appium.PageObjects.ListaProdutosPageObject;
 import com.alura.appium.PageObjects.LoginPageObject;
 import io.appium.java_client.AppiumDriver;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -12,9 +13,15 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FeatureLogin {
 
+    private AppiumDriver driver;
+
+    @Before
+    public void Before(){
+        driver = AppiumDriverConfig.Instance().driver;
+    }
+
     @Test
     public void T1_logar_com_usuario_nao_cadastrado(){
-        AppiumDriver driver = AppiumDriverConfig.Instance().driver;
 
         //Given
         LoginPageObject telaLogin = new LoginPageObject(driver);
@@ -29,7 +36,6 @@ public class FeatureLogin {
 
     @Test
     public void T2_logar_com_usuario_cadastrado(){
-        AppiumDriver driver = AppiumDriverConfig.Instance().driver;
 
         //Given
         LoginPageObject telaLogin = new LoginPageObject(driver);
@@ -53,7 +59,6 @@ public class FeatureLogin {
 
     @Test
     public void T3_logar_com_usuario_valida_e_senha_invalida(){
-        AppiumDriver driver = AppiumDriverConfig.Instance().driver;
 
         //Given
         LoginPageObject telaLogin = new LoginPageObject(driver);
