@@ -4,31 +4,35 @@ import com.alura.appium.PageObjects.CadastroPageObject;
 import com.alura.appium.PageObjects.ListaProdutosPageObject;
 import com.alura.appium.PageObjects.LoginPageObject;
 import io.appium.java_client.AppiumDriver;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FeatureLogin {
 
-    private AppiumDriver driver;
+    private static AppiumDriver driver;
 
     @Before
     public void Before(){
         driver = AppiumDriverConfig.Instance().driver;
     }
 
+    @AfterClass
+    public static void AfterClass(){
+        AppiumDriverConfig.InvalidaInstance();
+    }
+
     @Test
     public void T1_logar_com_usuario_nao_cadastrado(){
 
         //Given
+        String usuario = "UsuarioInexistente";
+        String senha = "123";
         LoginPageObject telaLogin = new LoginPageObject(driver);
         telaLogin.BuscarElementos();
 
         //When
-        telaLogin.Logar("UsuarioInexistente", "123");
+        telaLogin.Logar(usuario, senha);
 
         //Then
         Assert.assertEquals("Usuário ou senha inválidos", telaLogin.ObterMensagemErro());

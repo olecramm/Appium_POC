@@ -14,15 +14,15 @@ public class ListaProdutosPageObject extends PageObjectBase {
     private WebElement parentElement;
     private List<WebElement> childElement;
 
-    private String buttonProdutoStr;
-    private String buttonDeslogarStr;
-    private By parentElementId;
-    private By childElementClassName;
+    private final String buttonProdutoName;
+    private final String buttonDeslogarStr;
+    private final By parentElementId;
+    private final By childElementClassName;
 
 
     public ListaProdutosPageObject(AppiumDriver driver) {
         super(driver);
-        buttonProdutoStr = "Produtos";
+        buttonProdutoName = "Produtos";
         buttonDeslogarStr = "Deslogar";
 
         parentElementId = By.id("br.com.alura.aluraesporte:id/lista_produtos_recyclerview");
@@ -31,7 +31,7 @@ public class ListaProdutosPageObject extends PageObjectBase {
 
     @Override
     public void BuscarElementos() {
-        buttonProdutos = (MobileElement) driver.findElementByAccessibilityId(buttonProdutoStr);
+        buttonProdutos = (MobileElement) driver.findElementByAccessibilityId(buttonProdutoName);
         buttonDeslogar = (MobileElement) driver.findElementByAccessibilityId(buttonDeslogarStr);
     }
 

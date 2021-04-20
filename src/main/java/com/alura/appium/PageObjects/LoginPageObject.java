@@ -3,6 +3,8 @@ package com.alura.appium.PageObjects;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPageObject extends PageObjectBase {
 
@@ -31,6 +33,7 @@ public class LoginPageObject extends PageObjectBase {
 
     @Override
     public void BuscarElementos(){
+        EsperarElemento(driver,botaocadastroId,5);
         botaocadastro = (MobileElement) driver.findElement(botaocadastroId);
         botaoLogin = (MobileElement) driver.findElement(botaoLoginId);
         inputIdUsuario = (MobileElement) driver.findElement(inputIdUsuarioId);
@@ -46,13 +49,12 @@ public class LoginPageObject extends PageObjectBase {
         inputIdUsuario.setValue(idUsuario);
         inputSenha.setValue(senha);
         botaoLogin.click();
-
         return new ListaProdutosPageObject(this.driver);
     }
 
     public String ObterMensagemErro() {
+        EsperarElemento(driver,erroMessageId,5);
         erroMessage = (MobileElement) driver.findElement(erroMessageId);
-
         return erroMessage.getText();
     }
 }

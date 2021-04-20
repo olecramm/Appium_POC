@@ -10,11 +10,16 @@ import org.openqa.selenium.NoSuchElementException;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FeatureCadastro {
 
-    private AppiumDriver driver;
+    private static AppiumDriver driver;
 
     @Before
     public void Before(){
         driver = AppiumDriverConfig.Instance().driver;
+    }
+
+    @AfterClass
+    public static void AfterClass(){
+        AppiumDriverConfig.InvalidaInstance();
     }
 
     @Test
@@ -53,7 +58,7 @@ public class FeatureCadastro {
     }
 
     @Test
-    public  void  T3_cadastrar_usuario_ja_existente() throws NoSuchElementException{
+    public  void T3_cadastrar_usuario_ja_existente() throws NoSuchElementException{
 
         //Given
         String usuario = "Jonas";

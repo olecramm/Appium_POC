@@ -39,4 +39,7 @@ public class AppiumDriverConfig {
 
         driver = new AppiumDriver<>(urlConexao, configuracoes);
     }
+    public static void InvalidaInstance(){
+        _instance = null;
+    }
 }

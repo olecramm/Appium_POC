@@ -52,11 +52,8 @@ public class CadastroPageObject extends PageObjectBase {
     }
 
     public String ObterErroMessage (){
-        WebDriverWait espera = new WebDriverWait(driver, 10);
-        espera.until(ExpectedConditions.presenceOfElementLocated(erroID));
-
+        EsperarElemento(driver,erroID,10);
         erroMessageCadastro = (MobileElement) driver.findElement(erroID);
-
         return erroMessageCadastro.getText();
     }
 }

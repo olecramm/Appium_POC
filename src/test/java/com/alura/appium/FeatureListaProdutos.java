@@ -11,11 +11,21 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FeatureListaProdutos {
 
-    private AppiumDriver driver;
+    private static AppiumDriver driver;
 
     @Before
     public void before() {
         driver = AppiumDriverConfig.Instance().driver;
+    }
+
+    @BeforeClass
+    public static void BeforeClass(){
+
+    }
+
+    @AfterClass
+    public static void AfterClass(){
+        AppiumDriverConfig.InvalidaInstance();
     }
 
     @Test
@@ -40,7 +50,7 @@ public class FeatureListaProdutos {
     }
 
     @Test
-    public void verificar_abertura_tela_detalhes_do_produto() {
+    public void T2_verificar_abertura_tela_detalhes_do_produto() {
 
         //Gives
         ListaProdutosPageObject telaListaProdutos = new ListaProdutosPageObject(driver);
